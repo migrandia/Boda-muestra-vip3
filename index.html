@@ -10,42 +10,32 @@
            1. ENLACES (URLs) Y DATOS - EDITAR AQUÍ
            ========================================== */
         const ENLACES = {
-            // Canción de fondo
             musica: "https://www.dropbox.com/scl/fi/80hypdxkg24wx6x7oael2/En-Tus-Manos-Se-or.mp3?rlkey=j4di62c9sgj4txgwbpikcngp3&raw=1",
-            
-            // Fotos de secciones (Parallax)
             foto_portada: "https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1",
             foto_intermedia: "https://www.dropbox.com/scl/fi/yxcamxu6ark6qj5jf9da1/novios-corriendo.jpg?rlkey=wt1aapl5nh89afj7n53zou3qt&raw=1",
             foto_final: "https://www.dropbox.com/scl/fi/snutqjlkrv7oglqswicq2/novios-besandoce.jpg?rlkey=ad7z44z08wgr0f4wcd20et7nz&raw=1",
-            
-            // Ubicaciones de Google Maps
             mapa_ceremonia: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
             mapa_recepcion: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
-            
-            // Otros enlaces
-            enlace_hoteles: "https://migrandia.github.io/Hoteles/",
-            
-            // LINK REAL DE LIVERPOOL (Buscador de Mesas)
-            enlace_mesa_regalos: "https://mesaderegalos.liverpool.com.mx/buscar-mesa", 
-            
-            whatsapp_confirmacion: "https://wa.me/521234567890", // Número de contacto
-            fecha_limite: "10 de Noviembre de 2026" // Fecha para RSVP
+            enlace_hoteles: "https://migrandia.github.io/Hoteles/", // Se abrirá en pestaña nueva
+            enlace_mesa_regalos: "https://mesaderegalos.liverpool.com.mx/", 
+            whatsapp_confirmacion: "https://wa.me/521234567890",
+            fecha_limite: "10 de Noviembre de 2026"
         };
 
         /* ==========================================
            2. CONFIGURACIÓN DE COLORES INDIVIDUALES
            ========================================== */
         const COLORES = {
-            color_cuerpo_sobre: "#1a252f",         // Rectángulo principal
-            color_solapa_sobre: "#bca080",         // Triángulo que abre
-            color_sello_lacre: "#d4af37",          // Círculo con iniciales
-            color_fondo_invitacion: "#fdfcf9",      // Fondo "papel"
-            color_titulos: "#1a252f",              // Nombres y títulos de sección
-            color_detalles_oro: "#bca080",         // Emojis, líneas y acentos
-            color_bloques_solidos: "#1a252f",      // Fondo Ceremonia/Recepción/Final
-            color_botones: "#bca080",              // Color de fondo de botones
-            color_texto_botones: "#ffffff",        // Color de letra en botones
-            color_fondo_mesa_regalos: "#efeae2"    // Fondo del recuadro de regalos
+            color_cuerpo_sobre: "#1a252f",         
+            color_solapa_sobre: "#bca080",         
+            color_sello_lacre: "#d4af37",          
+            color_fondo_invitacion: "#fdfcf9",      
+            color_titulos: "#1a252f",              
+            color_detalles_oro: "#bca080",         
+            color_bloques_solidos: "#1a252f",      
+            color_botones: "#bca080",              
+            color_texto_botones: "#ffffff",        
+            color_fondo_mesa_regalos: "#efeae2"    
         };
     </script>
 
@@ -53,7 +43,6 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
-        /* Aplicación automática de los colores configurados */
         :root {
             --c-sobre: #1a252f; --c-solapa: #bca080; --c-sello: #d4af37;
             --c-fondo: #fdfcf9; --c-titulos: #1a252f; --c-oro: #bca080;
@@ -63,7 +52,6 @@
 
         body { margin: 0; padding: 0; background-color: #000; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; text-align: center; color: #333; line-height: 1.8; }
 
-        /* === SOBRE === */
         .envelope-wrapper { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #000; z-index: 3000; position: fixed; width: 100%; top: 0; left: 0; transition: opacity 0.8s ease; }
         .envelope { position: relative; width: 340px; height: 240px; background: var(--c-sobre); cursor: pointer; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; }
         .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 130px solid var(--c-solapa); border-left: 170px solid transparent; border-right: 170px solid transparent; transform-origin: top; transition: transform 0.6s ease; z-index: 4; pointer-events: none; }
@@ -72,7 +60,6 @@
         .envelope.open .pocket { opacity: 0; }
         .env-text { color: white; margin-top: 80px; font-family: 'Montserrat', serif; letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; z-index: 2; opacity: 0.8; }
 
-        /* === CONTENIDO === */
         .invitation-content { display: none; max-width: 480px; margin: 0 auto; background-color: var(--c-fondo); box-shadow: 0 0 40px rgba(0,0,0,0.5); }
         .parallax { height: 80vh; background-attachment: fixed; background-position: center; background-size: cover; position: relative; }
         .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); }
@@ -221,7 +208,6 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Inyectar colores configurados arriba
         const r = document.documentElement.style;
         r.setProperty('--c-sobre', COLORES.color_cuerpo_sobre);
         r.setProperty('--c-solapa', COLORES.color_solapa_sobre);
@@ -237,24 +223,19 @@
         var audio = document.getElementById('cancion');
         var musicStarted = false;
 
-        // FUNCIÓN CRÍTICA: Activar música en la primera interacción del usuario
         function enableMusic() {
             if (!musicStarted) {
                 audio.play().then(() => {
                     musicStarted = true;
                     document.getElementById('music-pill').innerText = "❙❙ PAUSA";
-                    // Remover los event listeners una vez que la música inicia
                     document.removeEventListener('click', enableMusic);
                     document.removeEventListener('touchstart', enableMusic);
-                }).catch(error => {
-                    console.log("Esperando interacción para audio...");
-                });
+                }).catch(e => console.log("Audio en espera..."));
             }
         }
 
-        // Escuchar clics o toques en cualquier parte de la pantalla
         document.addEventListener('click', enableMusic);
-        document.addEventListener('touchstart', enableMusic); // Para móviles
+        document.addEventListener('touchstart', enableMusic);
 
         function startReveal() {
             document.getElementById('envelope').classList.add('open');
@@ -269,7 +250,6 @@
             }, 1000);
         }
 
-        // Carga de datos dinámicos
         document.getElementById('source-musica').src = ENLACES.musica;
         document.getElementById('cancion').load();
         document.getElementById('img-portada').style.backgroundImage = `url('${ENLACES.foto_portada}')`;
@@ -287,7 +267,6 @@
             else { audio.pause(); document.getElementById('music-pill').innerText="▶ MÚSICA"; } 
         }
 
-        // Contador regresivo (10 DIC 2026)
         function updateTimer() {
             const weddingDate = new Date("December 10, 2026 17:00:00").getTime();
             const now = new Date().getTime();
@@ -300,7 +279,7 @@
             }
         }
         setInterval(updateTimer, 1000);
-        updateTimer(); // Ejecución inicial
+        updateTimer();
     </script>
 </body>
 </html>
