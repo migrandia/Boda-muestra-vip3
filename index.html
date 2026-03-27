@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda | Lucía & Alejandro</title>
+
+    <script>
+        /* ==========================================
+           EDITAR AQUÍ TODOS LOS ENLACES (URLs)
+           ========================================== */
+        const ENLACES = {
+            foto_whatsapp: "https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1",
+            musica: "https://www.dropbox.com/scl/fi/80hypdxkg24wx6x7oael2/En-Tus-Manos-Se-or.mp3?rlkey=j4di62c9sgj4txgwbpikcngp3&raw=1",
+            foto_portada: "https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1",
+            foto_intermedia: "https://www.dropbox.com/scl/fi/yxcamxu6ark6qj5jf9da1/novios-corriendo.jpg?rlkey=wt1aapl5nh89afj7n53zou3qt&raw=1",
+            foto_final: "https://www.dropbox.com/scl/fi/snutqjlkrv7oglqswicq2/novios-besandoce.jpg?rlkey=ad7z44z08wgr0f4wcd20et7nz&raw=1",
+            mapa_ceremonia: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
+            mapa_recepcion: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
+            enlace_hoteles: "https://migrandia.github.io/Hoteles/",
+            enlace_mesa_regalos: "https://mesaderegalos.liverpool.com.mx/",
+            whatsapp_confirmacion: "https://wa.me/521234567890",
+            fecha_limite: "10 de Noviembre de 2026"
+        };
+    </script>
+
+    <meta property="og:title" content="Nuestra Boda | Lucía & Alejandro">
+    <meta property="og:image" content="https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root {
+            --azul-solid: #2c3e50;
+            --oro: #bca080;
+            --oro-hover: #c5a059;
+            --fondo-pagina: #fdfcf9;
+            --texto: #333333;
+            --oscuro: #1a1a1a;
+            --ancho-max: 440px;
+        }
+
+        body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+        /* === ESTILOS DEL SOBRE === */
+        .envelope-wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            perspective: 1000px;
+            transition: 1s ease-in-out;
+        }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background-color: var(--azul-solid);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0; z-index: 2;
+            border-top: 120px solid var(--oro);
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            transform-origin: top;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .envelope.open::before { transform: rotateX(180deg); z-index: 0; }
+
+        .envelope-text {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            color: white;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            z-index: 3;
+        }
+
+        /* === CONTENIDO QUE SALE DEL SOBRE === */
+        .invitation-content {
+            display: none; /* Se activa al abrir */
+            max-width: var(--ancho-max);
+            margin: 0 auto;
+            background-color: var(--fondo-pagina);
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        /* === ESTILOS GENERALES (AZUL Y ORO) === */
+        .parallax { height: 70vh; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; }
+        .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); }
+
+        section { padding: 50px 25px; background: var(--fondo-pagina); }
+        h1.nombres { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: white; margin: 0; }
+        .conector { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--oro); display: block; margin: -20px 0; }
+        h2.titulo-seccion { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--azul-solid); }
+        
+        .bloque-azul { background-color: var(--azul-solid); color: white; padding: 60px 25px; }
+        .btn-oro { display: inline-block; margin-top: 20px; padding: 12px 35px; background-color: var(--oro); color: white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; font-weight: bold; border-radius: 4px; border: none; }
+
+        .honor-box strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; display: block; color: var(--azul-solid); }
+        .honor-box span { font-size: 0.6rem; color: var(--oro); text-transform: uppercase; letter-spacing: 1px; }
+
+        .timer-container { display: flex; justify-content: center; gap: 10px; padding: 20px 0; }
+        .t-num { font-size: 1.8rem; color: var(--oro); font-weight: bold; display: block; }
+        .t-lab { font-size: 0.5rem; text-transform: uppercase; color: #888; }
+
+        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 1000; background: white; padding: 10px 15px; border-radius: 30px; font-size: 10px; font-weight: bold; cursor: pointer; border: 1px solid #ddd; display: none; }
+
+        .banner-confirmar { background: #e74c3c; color: white; padding: 15px; margin: 20px 0; font-size: 0.8rem; font-weight: bold; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-wrapper" id="wrapper-envelope">
+        <div class="envelope" id="envelope" onclick="openInvitation()">
+            <div class="envelope-text">TOCA PARA ABRIR</div>
+        </div>
+    </div>
+
+    <div id="music-pill" onclick="toggleMusic()">▶ MÚSICA</div>
+    <audio id="cancion" loop><source id="source-musica" src="" type="audio/mpeg"></audio>
+
+    <div class="invitation-content" id="main-invitation">
+        
+        <div id="img-portada" class="parallax">
+            <div class="overlay"></div>
+            <div style="position: absolute; bottom: 15%; width: 100%;">
+                <h1 class="nombres">Lucía <span class="conector">&</span> Alejandro</h1>
+                <p style="color: white; letter-spacing: 4px; font-size: 0.8rem; font-weight: bold;">10 . DICIEMBRE . 2026</p>
+            </div>
+        </div>
+
+        <section>
+            <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: #666;">
+                "Dos corazones, un mismo camino. Gracias por ser parte de nuestra historia."
+            </p>
+        </section>
+
+        <section style="background: white;">
+            <h2 class="titulo-seccion">Nuestros Padres</h2>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                <div class="honor-box"><span>Padres de Ella</span><strong>Roberto Martínez</strong><strong>Lucía Ferré</strong></div>
+                <div class="honor-box"><span>Padres de Él</span><strong>Julián Soto</strong><strong>María Paz</strong></div>
+            </div>
+        </section>
+
+        <div class="bloque-azul" data-aos="fade-up">
+            <h2 class="titulo-seccion" style="color: white;">La Ceremonia</h2>
+            <p><strong>Catedral Metropolitana</strong><br>17:00 Horas</p>
+            <a id="btn-ceremonia" href="#" target="_blank" class="btn-oro">VER UBICACIÓN</a>
+        </div>
+
+        <section>
+            <div class="timer-container">
+                <div><span class="t-num" id="d">00</span><span class="t-lab">Días</span></div>
+                <div><span class="t-num" id="h">00</span><span class="t-lab">Hrs</span></div>
+                <div><span class="t-num" id="m">00</span><span class="t-lab">Min</span></div>
+                <div><span class="t-num" id="s">00</span><span class="t-lab">Seg</span></div>
+            </div>
+        </section>
+
+        <div id="img-intermedia" class="parallax" style="height: 40vh;"></div>
+
+        <div class="bloque-azul" data-aos="fade-up">
+            <h2 class="titulo-seccion" style="color: white;">La Recepción</h2>
+            <p><strong>Ex Hacienda San Ángel</strong><br>19:30 Horas</p>
+            <a id="btn-recepcion" href="#" target="_blank" class="btn-oro">VER UBICACIÓN</a>
+        </div>
+
+        <section style="background: white;">
+            <h2 class="titulo-seccion">Regalos & Hospedaje</h2>
+            <p style="font-size: 0.8rem;">Tu presencia es nuestro mejor regalo.</p>
+            <a id="btn-regalos" href="#" target="_blank" class="btn-oro" style="margin-right: 5px;">MESA DE REGALOS</a>
+            <a id="btn-hoteles" href="#" target="_blank" class="btn-oro">HOTELES</a>
+        </section>
+
+        <div id="img-final" class="parallax" style="height: 50vh;"></div>
+
+        <section style="background: var(--oscuro); color: white; padding: 60px 25px;">
+            <h1 class="nombres" style="font-size: 2.5rem;">¡Te Esperamos!</h1>
+            <div class="banner-confirmar">
+                CONFIRMAR ANTES DEL:<br>
+                <span id="txt-fecha-limite"></span>
+            </div>
+            <a id="btn-confirmar" href="#" target="_blank" class="btn-oro" style="width: 80%;">CONFIRMAR ASISTENCIA</a>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        function openInvitation() {
+            const envelope = document.getElementById('envelope');
+            const wrapper = document.getElementById('wrapper-envelope');
+            const content = document.getElementById('main-invitation');
+            const musicPill = document.getElementById('music-pill');
+
+            envelope.classList.add('open');
+            
+            setTimeout(() => {
+                wrapper.style.display = 'none';
+                content.style.display = 'block';
+                musicPill.style.display = 'block';
+                AOS.init({ duration: 1000, once: true });
+                playMusic();
+            }, 1200);
+        }
+
+        // Carga de datos
+        document.getElementById('source-musica').src = ENLACES.musica;
+        document.getElementById('cancion').load();
+        document.getElementById('img-portada').style.backgroundImage = `url('${ENLACES.foto_portada}')`;
+        document.getElementById('img-intermedia').style.backgroundImage = `url('${ENLACES.foto_intermedia}')`;
+        document.getElementById('img-final').style.backgroundImage = `url('${ENLACES.foto_final}')`;
+        document.getElementById('btn-ceremonia').href = ENLACES.mapa_ceremonia;
+        document.getElementById('btn-recepcion').href = ENLACES.mapa_recepcion;
+        document.getElementById('btn-hoteles').href = ENLACES.enlace_hoteles;
+        document.getElementById('btn-regalos').href = ENLACES.enlace_mesa_regalos;
+        document.getElementById('btn-confirmar').href = ENLACES.whatsapp_confirmacion;
+        document.getElementById('txt-fecha-limite').innerText = ENLACES.fecha_limite;
+
+        var audio = document.getElementById('cancion');
+        function playMusic() { audio.play(); document.getElementById('music-pill').innerText = "❙❙ PAUSA"; }
+        function toggleMusic() { 
+            if(audio.paused){ audio.play(); document.getElementById('music-pill').innerText = "❙❙ PAUSA"; } 
+            else { audio.pause(); document.getElementById('music-pill').innerText = "▶ MÚSICA"; } 
+        }
+
+        function updateTimer() {
+            const weddingDate = new Date("December 10, 2026 17:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+            if (diff > 0) {
+                document.getElementById('d').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById('h').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('m').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('s').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+            }
+        }
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
