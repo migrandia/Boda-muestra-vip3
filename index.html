@@ -7,89 +7,97 @@
 
     <script>
         /* ==========================================
-           1. EDITAR ENLACES (URLs)
+           1. ENLACES (URLs)
            ========================================== */
         const ENLACES = {
             musica: "https://www.dropbox.com/scl/fi/80hypdxkg24wx6x7oael2/En-Tus-Manos-Se-or.mp3?rlkey=j4di62c9sgj4txgwbpikcngp3&raw=1",
             foto_portada: "https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1",
             foto_intermedia: "https://www.dropbox.com/scl/fi/yxcamxu6ark6qj5jf9da1/novios-corriendo.jpg?rlkey=wt1aapl5nh89afj7n53zou3qt&raw=1",
             foto_final: "https://www.dropbox.com/scl/fi/snutqjlkrv7oglqswicq2/novios-besandoce.jpg?rlkey=ad7z44z08wgr0f4wcd20et7nz&raw=1",
-            mapa_ceremonia: "#",
-            mapa_recepcion: "#",
-            enlace_hoteles: "#",
-            enlace_mesa_regalos: "#",
+            mapa_ceremonia: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
+            mapa_recepcion: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
+            enlace_hoteles: "https://migrandia.github.io/Hoteles/",
+            enlace_mesa_regalos: "51234567",
             whatsapp_confirmacion: "https://wa.me/521234567890",
             fecha_limite: "10 de Noviembre de 2026"
         };
 
         /* ==========================================
-           2. EDITAR COLORES (Códigos Hexadecimales)
+           2. CONFIGURACIÓN DE COLORES INDIVIDUALES
            ========================================== */
         const COLORES = {
-            principal: "#1a252f",   // Color de secciones sólidas y el sobre
-            dorado: "#bca080",      // Color de detalles, botones y solapa
-            fondo_claro: "#fdfcf9", // Color del fondo de la invitación (papel)
-            texto_oscuro: "#333333",// Color de las letras principales
-            texto_blanco: "#ffffff" // Color de letras sobre fondos oscuros
+            color_cuerpo_sobre: "#1a252f",         
+            color_solapa_sobre: "#bca080",         
+            color_sello_lacre: "#d4af37",          
+            color_fondo_invitacion: "#fdfcf9",      
+            color_titulos: "#1a252f",              
+            color_detalles_oro: "#bca080",         
+            color_bloques_solidos: "#1a252f",      
+            color_botones: "#bca080",              
+            color_texto_botones: "#ffffff",        
+            color_fondo_mesa_regalos: "#efeae2"    // Fondo del recuadro de regalos
         };
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
-        /* Aplicación automática de los colores configurados arriba */
         :root {
-            --color-primario: #1a252f; 
-            --color-dorado: #bca080;
-            --color-fondo: #fdfcf9;
-            --color-texto: #333333;
+            --c-sobre: #1a252f; --c-solapa: #bca080; --c-sello: #d4af37;
+            --c-fondo: #fdfcf9; --c-titulos: #1a252f; --c-oro: #bca080;
+            --c-bloque: #1a252f; --c-btn: #bca080; --c-btn-txt: #ffffff;
+            --c-regalos: #efeae2;
         }
 
-        body { margin: 0; padding: 0; background-color: #000; font-family: 'Montserrat', sans-serif; overflow-x: hidden; text-align: center; color: var(--color-texto); }
+        body { margin: 0; padding: 0; background-color: #000; font-family: 'Playfair Display', serif; overflow-x: hidden; text-align: center; color: #333; line-height: 1.6; }
 
         /* === SOBRE === */
         .envelope-wrapper { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #000; z-index: 3000; position: fixed; width: 100%; top: 0; left: 0; transition: opacity 0.8s ease; }
-        .envelope { position: relative; width: 340px; height: 240px; background: var(--color-primario); cursor: pointer; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; }
-        .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 130px solid var(--color-dorado); border-left: 170px solid transparent; border-right: 170px solid transparent; transform-origin: top; transition: transform 0.6s ease; z-index: 4; pointer-events: none; }
-        .pocket { position: absolute; bottom: 30px; width: 60px; height: 60px; background: var(--color-dorado); border-radius: 50%; z-index: 5; box-shadow: 0 5px 15px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; font-family: 'Great Vibes', cursive; color: white; font-size: 1.5rem; pointer-events: none; }
+        .envelope { position: relative; width: 340px; height: 240px; background: var(--c-sobre); cursor: pointer; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; }
+        .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 130px solid var(--c-solapa); border-left: 170px solid transparent; border-right: 170px solid transparent; transform-origin: top; transition: transform 0.6s ease; z-index: 4; pointer-events: none; }
+        .pocket { position: absolute; bottom: 30px; width: 65px; height: 65px; background: var(--c-sello); border-radius: 50%; z-index: 5; box-shadow: 0 5px 15px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; font-family: 'Great Vibes', cursive; color: white; font-size: 1.8rem; pointer-events: none; border: 2px solid rgba(255,255,255,0.2); }
         .envelope.open .flap { transform: rotateX(180deg); }
         .envelope.open .pocket { opacity: 0; }
-        .env-text { color: white; margin-top: 80px; font-family: 'Cormorant Garamond'; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; z-index: 2; }
+        .env-text { color: white; margin-top: 80px; font-family: 'Cinzel', serif; letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; z-index: 2; }
 
         /* === CONTENIDO === */
-        .invitation-content { display: none; max-width: 480px; margin: 0 auto; background-color: var(--color-fondo); }
+        .invitation-content { display: none; max-width: 480px; margin: 0 auto; background-color: var(--c-fondo); box-shadow: 0 0 40px rgba(0,0,0,0.5); }
         .parallax { height: 80vh; background-attachment: fixed; background-position: center; background-size: cover; position: relative; }
         .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); }
-        section { padding: 60px 25px; }
-        h1.nombres { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: white; margin: 0; }
-        .conector { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--color-dorado); display: block; margin: -20px 0; }
-        h2.titulo { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--color-primario); }
         
-        .bloque-solido { background-color: var(--color-primario); color: white; padding: 70px 30px; border-bottom: 4px solid var(--color-dorado); }
-        .btn-accion { display: inline-block; margin-top: 25px; padding: 15px 35px; background-color: var(--color-dorado); color: white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; }
+        section { padding: 70px 25px; }
+        h1.nombres { font-family: 'Cinzel', serif; font-size: 3rem; color: white; margin: 0; font-weight: 400; }
+        .conector { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--c-solapa); display: block; margin: -25px 0; }
+        h2.titulo { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--c-titulos); letter-spacing: 2px; }
+        
+        .bloque-solido { background-color: var(--c-bloque); color: white; padding: 80px 30px; border-bottom: 5px solid var(--c-oro); }
+        .btn-accion { display: inline-block; margin-top: 25px; padding: 16px 40px; background-color: var(--c-btn); color: var(--c-btn-txt); text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; border-radius: 2px; border: none; cursor: pointer; transition: 0.3s; font-family: 'Cinzel', serif; }
+        .btn-accion:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .honor-box strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; display: block; color: var(--color-primario); }
-        .honor-box span { font-size: 0.6rem; color: var(--color-dorado); text-transform: uppercase; letter-spacing: 1px; }
+        .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .honor-box { padding: 20px 10px; }
+        .honor-box.con-fondo { background-color: var(--c-regalos); border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); }
+        .honor-box strong { font-family: 'Cinzel', serif; font-size: 1rem; display: block; color: var(--c-titulos); margin-top: 5px; }
+        .honor-box span { font-size: 0.6rem; color: var(--c-oro); text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
 
-        .timeline { text-align: left; padding-left: 30px; border-left: 1px solid var(--color-dorado); margin: 40px 25px; }
-        .step { position: relative; margin-bottom: 35px; }
-        .step::before { content: ''; position: absolute; left: -36px; top: 10px; width: 10px; height: 10px; background: var(--color-dorado); border-radius: 50%; }
+        .timeline { text-align: left; padding-left: 35px; border-left: 1px solid var(--c-oro); margin: 50px 25px; }
+        .step { position: relative; margin-bottom: 40px; font-size: 0.9rem; }
+        .step::before { content: ''; position: absolute; left: -41px; top: 12px; width: 10px; height: 10px; background: var(--c-oro); border-radius: 50%; box-shadow: 0 0 10px var(--c-oro); }
 
-        .timer-container { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-        .t-num { font-size: 2rem; color: var(--color-dorado); font-weight: bold; }
-        .t-lab { font-size: 0.6rem; text-transform: uppercase; color: #999; }
+        .timer-container { display: flex; justify-content: center; gap: 20px; margin: 40px 0; }
+        .t-num { font-size: 2.2rem; color: var(--c-oro); font-family: 'Cinzel', serif; }
+        .t-lab { font-size: 0.6rem; text-transform: uppercase; color: #888; letter-spacing: 1px; }
 
-        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 4000; background: white; padding: 10px 15px; border-radius: 30px; font-size: 10px; font-weight: bold; cursor: pointer; display: none; border: 1px solid #ddd; }
+        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 4000; background: rgba(255,255,255,0.9); padding: 12px 18px; border-radius: 40px; font-size: 9px; font-weight: bold; cursor: pointer; display: none; border: 1px solid #eee; font-family: 'Cinzel', serif; }
     </style>
 </head>
 <body>
 
     <div class="envelope-wrapper" id="wrapper-envelope">
         <div class="envelope" id="envelope" onclick="startReveal()">
-            <div class="flap" id="solapa-sobre"></div>
-            <div class="pocket" id="sello-sobre">L&A</div>
+            <div class="flap"></div>
+            <div class="pocket">L&A</div>
             <div class="env-text">Nuestra Boda<br>Toca para abrir</div>
         </div>
     </div>
@@ -101,39 +109,36 @@
         
         <div id="img-portada" class="parallax">
             <div class="overlay"></div>
-            <div style="position: absolute; bottom: 15%; width: 100%;">
+            <div style="position: absolute; bottom: 20%; width: 100%;">
                 <h1 class="nombres" data-aos="fade-up">Lucía <span class="conector">&</span> Alejandro</h1>
-                <p style="color: white; letter-spacing: 5px;" data-aos="fade-up">10 . DICIEMBRE . 2026</p>
+                <p style="color: white; letter-spacing: 6px; font-size: 0.8rem; font-family: 'Cinzel', serif;" data-aos="fade-up">10 . DICIEMBRE . 2026</p>
             </div>
         </div>
 
         <section>
             <h2 class="titulo" data-aos="fade-up">Nuestra Historia</h2>
-            <p style="font-style: italic; color: #555;" data-aos="fade-up">"Hay momentos que cambian la vida para siempre."</p>
+            <div style="max-width: 90%; margin: 0 auto; color: #555; font-size: 1.1rem; line-height: 1.8;" data-aos="fade-up">
+                <p><i>"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</i></p>
+                <p>Parece que fue ayer cuando nuestros caminos se cruzaron por primera vez, sin imaginar que cada risa, cada reto y cada momento compartido nos traería hasta aquí. Hemos construido una historia basada en la complicidad, el respeto y ese amor infinito que crece con cada detalle.</p>
+                <p>Hoy, con el corazón lleno de gratitud y alegría, hemos decidido unir nuestras vidas para siempre. No es solo el inicio de un matrimonio, es la continuación de una aventura que queremos compartir con las personas que más amamos.</p>
+            </div>
         </section>
 
         <section style="background-color: white;">
-            <span style="letter-spacing: 3px; font-size: 0.7rem; color: var(--color-dorado); font-weight: bold;">CON LA BENDICIÓN DE</span>
+            <span style="letter-spacing: 4px; font-size: 0.65rem; color: var(--c-oro); font-weight: bold;">CON LA BENDICIÓN DE</span>
             <h2 class="titulo" data-aos="fade-up">Nuestros Padres</h2>
             <div class="honor-grid" data-aos="fade-up">
-                <div class="honor-box"><span>PADRES DE ELLA</span><strong class="txt-dinamico-primario">Roberto Martínez</strong><strong class="txt-dinamico-primario">Lucía Ferré</strong></div>
-                <div class="honor-box"><span>PADRES DE ÉL</span><strong class="txt-dinamico-primario">Julián Soto</strong><strong class="txt-dinamico-primario">María Paz</strong></div>
+                <div class="honor-box"><span>PADRES DE ELLA</span><strong>Roberto Martínez</strong><strong>Lucía Ferré</strong></div>
+                <div class="honor-box"><span>PADRES DE ÉL</span><strong>Julián Soto</strong><strong>María Paz</strong></div>
             </div>
         </section>
 
-        <div class="bloque-solido" id="seccion-ceremonia" data-aos="fade-up">
+        <div class="bloque-solido" data-aos="fade-up">
             <h2 class="titulo" style="color: white;">La Ceremonia</h2>
-            <p><strong>Catedral Metropolitana</strong><br>17:00 Horas</p>
+            <p style="font-family: 'Cinzel', serif; letter-spacing: 1px;">Catedral Metropolitana de la Ciudad</p>
+            <p style="font-size: 1.5rem; color: var(--c-oro); margin: 15px 0;"><strong>17:00 Horas</strong></p>
             <a id="btn-ceremonia" href="#" target="_blank" class="btn-accion">UBICACIÓN</a>
         </div>
-
-        <section>
-            <h2 class="titulo" data-aos="fade-up">Nuestros Padrinos</h2>
-            <div class="honor-grid" data-aos="fade-up">
-                <div class="honor-box"><span>VELACIÓN</span><strong class="txt-dinamico-primario">Carlos Martínez</strong><strong class="txt-dinamico-primario">Elena Guzmán</strong></div>
-                <div class="honor-box"><span>ANILLOS</span><strong class="txt-dinamico-primario">Julián Soto Jr.</strong><strong class="txt-dinamico-primario">María Elena Paz</strong></div>
-            </div>
-        </section>
 
         <section>
             <div class="timer-container" data-aos="zoom-in">
@@ -146,53 +151,66 @@
 
         <div id="img-intermedia" class="parallax" style="height: 50vh;"></div>
 
-        <div class="bloque-solido" id="seccion-recepcion" data-aos="fade-up">
+        <div class="bloque-solido" data-aos="fade-up">
             <h2 class="titulo" style="color: white;">La Recepción</h2>
-            <p><strong>Ex Hacienda San Ángel</strong><br>19:30 Horas</p>
+            <p style="font-family: 'Cinzel', serif; letter-spacing: 1px;">Ex Hacienda San Ángel</p>
+            <p style="font-size: 1.5rem; color: var(--c-oro); margin: 15px 0;"><strong>19:30 Horas</strong></p>
             <a id="btn-recepcion" href="#" target="_blank" class="btn-accion">UBICACIÓN</a>
         </div>
 
         <section>
             <h2 class="titulo" data-aos="fade-up">Itinerario</h2>
             <div class="timeline" data-aos="fade-up">
-                <div class="step">⛪ <strong>17:00 HRS</strong><br>Ceremonia Religiosa</div>
-                <div class="step">🥂 <strong>19:30 HRS</strong><br>Cóctel</div>
-                <div class="step">🍽️ <strong>20:30 HRS</strong><br>Cena de Gala</div>
-                <div class="step">💃 <strong>22:00 HRS</strong><br>¡A Bailar!</div>
+                <div class="step">⛪ <strong style="font-family: 'Cinzel', serif;">17:00 HRS</strong><br>Ceremonia Religiosa</div>
+                <div class="step">🥂 <strong style="font-family: 'Cinzel', serif;">19:30 HRS</strong><br>Cóctel de Bienvenida</div>
+                <div class="step">🍽️ <strong style="font-family: 'Cinzel', serif;">20:30 HRS</strong><br>Cena de Gala</div>
+                <div class="step">💃 <strong style="font-family: 'Cinzel', serif;">22:00 HRS</strong><br>¡A Bailar!</div>
             </div>
         </section>
 
-        <section style="background-color: var(--color-fondo);">
-            <h2 class="titulo" data-aos="fade-up">Obsequios</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 25px;">Su presencia es nuestro mejor regalo.</p>
+        <section style="background-color: #f9f9f9; border-top: 1px solid #eee;">
+            <h2 class="titulo" data-aos="fade-up">Hospedaje</h2>
+            <p style="font-size: 0.9rem; max-width: 80%; margin: 0 auto 20px;">Para su comodidad durante el evento, recomendamos estas opciones con tarifas especiales.</p>
+            <a id="btn-hoteles" href="#" target="_blank" class="btn-accion">VER HOTELES</a>
+        </section>
+
+        <section style="background-color: var(--c-fondo);">
+            <h2 class="titulo" data-aos="fade-up">Mesa de Regalos</h2>
             <div class="honor-grid" data-aos="fade-up">
-                <div class="honor-box">
-                    <span>🎁 MESA DE REGALOS</span><br><strong class="txt-dinamico-primario">Liverpool #51234567</strong><br>
-                    <a id="btn-regalos" href="#" target="_blank" class="btn-accion" style="padding: 10px 20px; font-size: 0.6rem;">IR A LA MESA</a>
+                <div class="honor-box con-fondo">
+                    <span>🎁 LIVERPOOL</span><br><strong>Evento: 51234567</strong><br>
+                    <a id="btn-regalos" href="#" target="_blank" class="btn-accion" style="padding: 10px 20px; font-size: 0.6rem; margin-top: 10px;">IR A LA MESA</a>
                 </div>
-                <div class="honor-box">
-                    <span>✉️ EFECTIVO</span><p style="font-size: 0.8rem;">Lluvia de Sobres el día del evento.</p>
+                <div class="honor-box con-fondo">
+                    <span>✉️ EFECTIVO</span><p style="font-size: 0.8rem; margin-top: 10px;">Agradecemos su detalle mediante lluvia de sobres el día del evento.</p>
                 </div>
             </div>
         </section>
 
         <div id="img-final" class="parallax" style="height: 60vh;"></div>
 
-        <div class="bloque-solido" id="seccion-final">
-            <h1 class="nombres" style="font-size: 2.5rem;">¡Te Esperamos!</h1>
-            <p style="margin: 20px 0; font-weight: bold; letter-spacing: 2px;">CONFIRMAR ANTES DEL:<br><span id="txt-fecha-limite"></span></p>
-            <a id="btn-confirmar" href="#" target="_blank" class="btn-accion" style="width: 80%; background-color: white; color: var(--color-primario);">CONFIRMAR POR WHATSAPP</a>
-            <p style="margin-top: 30px; font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--color-dorado);">Lucía & Alejandro</p>
+        <div class="bloque-solido" style="border-bottom: none;">
+            <h1 class="nombres" style="font-size: 2.8rem;" data-aos="fade-down">¡Te Esperamos!</h1>
+            <p style="margin: 30px 0; font-family: 'Cinzel', serif; letter-spacing: 2px;">CONFIRMAR ANTES DEL:<br><span id="txt-fecha-limite" style="color: var(--c-oro); font-size: 1.2rem;"></span></p>
+            <a id="btn-confirmar" href="#" target="_blank" class="btn-accion" style="width: 85%; background-color: white; color: var(--c-bloque);">CONFIRMAR POR WHATSAPP</a>
+            <p style="margin-top: 50px; font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--c-oro);">Lucía & Alejandro</p>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Aplicar colores dinámicamente al cargar
-        document.documentElement.style.setProperty('--color-primario', COLORES.principal);
-        document.documentElement.style.setProperty('--color-dorado', COLORES.dorado);
-        document.documentElement.style.setProperty('--color-fondo', COLORES.fondo_claro);
-        document.documentElement.style.setProperty('--color-texto', COLORES.texto_oscuro);
+        // Aplicar colores
+        const r = document.documentElement.style;
+        r.setProperty('--c-sobre', COLORES.color_cuerpo_sobre);
+        r.setProperty('--c-solapa', COLORES.color_solapa_sobre);
+        r.setProperty('--c-sello', COLORES.color_sello_lacre);
+        r.setProperty('--c-fondo', COLORES.color_fondo_invitacion);
+        r.setProperty('--c-titulos', COLORES.color_titulos);
+        r.setProperty('--c-oro', COLORES.color_detalles_oro);
+        r.setProperty('--c-bloque', COLORES.color_bloques_solidos);
+        r.setProperty('--c-btn', COLORES.color_botones);
+        r.setProperty('--c-btn-txt', COLORES.color_texto_botones);
+        r.setProperty('--c-regalos', COLORES.color_fondo_mesa_regalos);
 
         function startReveal() {
             document.getElementById('envelope').classList.add('open');
@@ -202,7 +220,7 @@
                     document.getElementById('wrapper-envelope').style.display = 'none';
                     document.getElementById('main-invitation').style.display = 'block';
                     document.getElementById('music-pill').style.display = 'block';
-                    AOS.init({ duration: 1000, once: true });
+                    AOS.init({ duration: 1200, once: true });
                     document.getElementById('cancion').play();
                 }, 600);
             }, 1000);
@@ -215,6 +233,7 @@
         document.getElementById('img-final').style.backgroundImage = `url('${ENLACES.foto_final}')`;
         document.getElementById('btn-ceremonia').href = ENLACES.mapa_ceremonia;
         document.getElementById('btn-recepcion').href = ENLACES.mapa_recepcion;
+        document.getElementById('btn-hoteles').href = ENLACES.enlace_hoteles;
         document.getElementById('btn-regalos').href = ENLACES.enlace_mesa_regalos;
         document.getElementById('btn-confirmar').href = ENLACES.whatsapp_confirmacion;
         document.getElementById('txt-fecha-limite').innerText = ENLACES.fecha_limite;
