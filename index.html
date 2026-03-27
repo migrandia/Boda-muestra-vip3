@@ -7,7 +7,7 @@
 
     <script>
         /* ==========================================
-           EDITAR AQUÍ TODOS LOS ENLACES (URLs)
+           1. EDITAR ENLACES (URLs)
            ========================================== */
         const ENLACES = {
             musica: "https://www.dropbox.com/scl/fi/80hypdxkg24wx6x7oael2/En-Tus-Manos-Se-or.mp3?rlkey=j4di62c9sgj4txgwbpikcngp3&raw=1",
@@ -21,95 +21,75 @@
             whatsapp_confirmacion: "https://wa.me/521234567890",
             fecha_limite: "10 de Noviembre de 2026"
         };
+
+        /* ==========================================
+           2. EDITAR COLORES (Códigos Hexadecimales)
+           ========================================== */
+        const COLORES = {
+            principal: "#1a252f",   // Color de secciones sólidas y el sobre
+            dorado: "#bca080",      // Color de detalles, botones y solapa
+            fondo_claro: "#fdfcf9", // Color del fondo de la invitación (papel)
+            texto_oscuro: "#333333",// Color de las letras principales
+            texto_blanco: "#ffffff" // Color de letras sobre fondos oscuros
+        };
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
+        /* Aplicación automática de los colores configurados arriba */
         :root {
-            --azul-premium: #141d26;
-            --oro: #bca080;
-            --fondo-pagina: #fdfcf9;
-            --ancho-max: 480px;
+            --color-primario: #1a252f; 
+            --color-dorado: #bca080;
+            --color-fondo: #fdfcf9;
+            --color-texto: #333333;
         }
 
-        body { margin: 0; padding: 0; background-color: #000; font-family: 'Montserrat', sans-serif; overflow-x: hidden; text-align: center; }
+        body { margin: 0; padding: 0; background-color: #000; font-family: 'Montserrat', sans-serif; overflow-x: hidden; text-align: center; color: var(--color-texto); }
 
-        /* === SOBRE CORREGIDO === */
-        .envelope-wrapper {
-            height: 100vh; display: flex; justify-content: center; align-items: center;
-            background-color: #000; z-index: 3000; position: fixed; width: 100%; top: 0; left: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .envelope {
-            position: relative; width: 340px; height: 240px;
-            background: linear-gradient(135deg, #1a252f 0%, #141d26 100%);
-            cursor: pointer; border-radius: 5px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            display: flex; justify-content: center; align-items: center;
-        }
-
-        /* La solapa (Triángulo superior) */
-        .flap {
-            position: absolute; top: 0; left: 0; width: 0; height: 0;
-            border-top: 130px solid var(--oro);
-            border-left: 170px solid transparent; border-right: 170px solid transparent;
-            transform-origin: top; transition: transform 0.6s ease; z-index: 4;
-            pointer-events: none; /* Esto permite que el clic pase al sobre */
-        }
-
-        /* Sello decorativo */
-        .pocket {
-            position: absolute; bottom: 30px; width: 60px; height: 60px;
-            background: var(--oro); border-radius: 50%; z-index: 5;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            display: flex; justify-content: center; align-items: center;
-            font-family: 'Great Vibes', cursive; color: white; font-size: 1.5rem;
-            pointer-events: none;
-        }
-
+        /* === SOBRE === */
+        .envelope-wrapper { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #000; z-index: 3000; position: fixed; width: 100%; top: 0; left: 0; transition: opacity 0.8s ease; }
+        .envelope { position: relative; width: 340px; height: 240px; background: var(--color-primario); cursor: pointer; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; }
+        .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 130px solid var(--color-dorado); border-left: 170px solid transparent; border-right: 170px solid transparent; transform-origin: top; transition: transform 0.6s ease; z-index: 4; pointer-events: none; }
+        .pocket { position: absolute; bottom: 30px; width: 60px; height: 60px; background: var(--color-dorado); border-radius: 50%; z-index: 5; box-shadow: 0 5px 15px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; font-family: 'Great Vibes', cursive; color: white; font-size: 1.5rem; pointer-events: none; }
         .envelope.open .flap { transform: rotateX(180deg); }
         .envelope.open .pocket { opacity: 0; }
-
         .env-text { color: white; margin-top: 80px; font-family: 'Cormorant Garamond'; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase; z-index: 2; }
 
         /* === CONTENIDO === */
-        .invitation-content { display: none; max-width: var(--ancho-max); margin: 0 auto; background-color: var(--fondo-pagina); }
-
+        .invitation-content { display: none; max-width: 480px; margin: 0 auto; background-color: var(--color-fondo); }
         .parallax { height: 80vh; background-attachment: fixed; background-position: center; background-size: cover; position: relative; }
         .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); }
-
         section { padding: 60px 25px; }
         h1.nombres { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: white; margin: 0; }
-        .conector { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--oro); display: block; margin: -20px 0; }
-        h2.titulo { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--azul-premium); }
+        .conector { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--color-dorado); display: block; margin: -20px 0; }
+        h2.titulo { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--color-primario); }
         
-        .bloque-azul { background-color: var(--azul-premium); color: white; padding: 70px 30px; border-bottom: 4px solid var(--oro); }
-        .btn-oro { display: inline-block; margin-top: 25px; padding: 15px 35px; background-color: var(--oro); color: white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; border-radius: 4px; }
+        .bloque-solido { background-color: var(--color-primario); color: white; padding: 70px 30px; border-bottom: 4px solid var(--color-dorado); }
+        .btn-accion { display: inline-block; margin-top: 25px; padding: 15px 35px; background-color: var(--color-dorado); color: white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; }
 
         .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .honor-box strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; display: block; color: var(--azul-premium); }
-        .honor-box span { font-size: 0.6rem; color: var(--oro); text-transform: uppercase; letter-spacing: 1px; }
+        .honor-box strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; display: block; color: var(--color-primario); }
+        .honor-box span { font-size: 0.6rem; color: var(--color-dorado); text-transform: uppercase; letter-spacing: 1px; }
 
-        .timeline { text-align: left; padding-left: 30px; border-left: 1px solid var(--oro); margin: 40px 25px; }
+        .timeline { text-align: left; padding-left: 30px; border-left: 1px solid var(--color-dorado); margin: 40px 25px; }
         .step { position: relative; margin-bottom: 35px; }
-        .step::before { content: ''; position: absolute; left: -36px; top: 10px; width: 10px; height: 10px; background: var(--oro); border-radius: 50%; }
-
-        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 4000; background: white; padding: 10px 15px; border-radius: 30px; font-size: 10px; font-weight: bold; cursor: pointer; display: none; border: 1px solid #ddd; }
+        .step::before { content: ''; position: absolute; left: -36px; top: 10px; width: 10px; height: 10px; background: var(--color-dorado); border-radius: 50%; }
 
         .timer-container { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-        .t-num { font-size: 2rem; color: var(--oro); font-weight: bold; }
+        .t-num { font-size: 2rem; color: var(--color-dorado); font-weight: bold; }
         .t-lab { font-size: 0.6rem; text-transform: uppercase; color: #999; }
+
+        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 4000; background: white; padding: 10px 15px; border-radius: 30px; font-size: 10px; font-weight: bold; cursor: pointer; display: none; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
     <div class="envelope-wrapper" id="wrapper-envelope">
         <div class="envelope" id="envelope" onclick="startReveal()">
-            <div class="flap"></div>
-            <div class="pocket">L&A</div>
+            <div class="flap" id="solapa-sobre"></div>
+            <div class="pocket" id="sello-sobre">L&A</div>
             <div class="env-text">Nuestra Boda<br>Toca para abrir</div>
         </div>
     </div>
@@ -133,25 +113,25 @@
         </section>
 
         <section style="background-color: white;">
-            <span style="letter-spacing: 3px; font-size: 0.7rem; color: var(--oro); font-weight: bold;">CON LA BENDICIÓN DE</span>
+            <span style="letter-spacing: 3px; font-size: 0.7rem; color: var(--color-dorado); font-weight: bold;">CON LA BENDICIÓN DE</span>
             <h2 class="titulo" data-aos="fade-up">Nuestros Padres</h2>
             <div class="honor-grid" data-aos="fade-up">
-                <div class="honor-box"><span>PADRES DE ELLA</span><strong>Roberto Martínez</strong><strong>Lucía Ferré</strong></div>
-                <div class="honor-box"><span>PADRES DE ÉL</span><strong>Julián Soto</strong><strong>María Paz</strong></div>
+                <div class="honor-box"><span>PADRES DE ELLA</span><strong class="txt-dinamico-primario">Roberto Martínez</strong><strong class="txt-dinamico-primario">Lucía Ferré</strong></div>
+                <div class="honor-box"><span>PADRES DE ÉL</span><strong class="txt-dinamico-primario">Julián Soto</strong><strong class="txt-dinamico-primario">María Paz</strong></div>
             </div>
         </section>
 
-        <div class="bloque-azul" data-aos="fade-up">
+        <div class="bloque-solido" id="seccion-ceremonia" data-aos="fade-up">
             <h2 class="titulo" style="color: white;">La Ceremonia</h2>
             <p><strong>Catedral Metropolitana</strong><br>17:00 Horas</p>
-            <a id="btn-ceremonia" href="#" target="_blank" class="btn-oro">UBICACIÓN</a>
+            <a id="btn-ceremonia" href="#" target="_blank" class="btn-accion">UBICACIÓN</a>
         </div>
 
         <section>
             <h2 class="titulo" data-aos="fade-up">Nuestros Padrinos</h2>
             <div class="honor-grid" data-aos="fade-up">
-                <div class="honor-box"><span>VELACIÓN</span><strong>Carlos Martínez</strong><strong>Elena Guzmán</strong></div>
-                <div class="honor-box"><span>ANILLOS</span><strong>Julián Soto Jr.</strong><strong>María Elena Paz</strong></div>
+                <div class="honor-box"><span>VELACIÓN</span><strong class="txt-dinamico-primario">Carlos Martínez</strong><strong class="txt-dinamico-primario">Elena Guzmán</strong></div>
+                <div class="honor-box"><span>ANILLOS</span><strong class="txt-dinamico-primario">Julián Soto Jr.</strong><strong class="txt-dinamico-primario">María Elena Paz</strong></div>
             </div>
         </section>
 
@@ -166,10 +146,10 @@
 
         <div id="img-intermedia" class="parallax" style="height: 50vh;"></div>
 
-        <div class="bloque-azul" data-aos="fade-up">
+        <div class="bloque-solido" id="seccion-recepcion" data-aos="fade-up">
             <h2 class="titulo" style="color: white;">La Recepción</h2>
             <p><strong>Ex Hacienda San Ángel</strong><br>19:30 Horas</p>
-            <a id="btn-recepcion" href="#" target="_blank" class="btn-oro">UBICACIÓN</a>
+            <a id="btn-recepcion" href="#" target="_blank" class="btn-accion">UBICACIÓN</a>
         </div>
 
         <section>
@@ -182,38 +162,40 @@
             </div>
         </section>
 
-        <section style="background-color: #f9f9f9;">
-            <h2 class="titulo" data-aos="fade-up">Hospedaje</h2>
-            <a id="btn-hoteles" href="#" target="_blank" class="btn-oro">VER HOTELES</a>
-        </section>
-
-        <section>
-            <h2 class="titulo" data-aos="fade-up">Mesa de Regalos</h2>
+        <section style="background-color: var(--color-fondo);">
+            <h2 class="titulo" data-aos="fade-up">Obsequios</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 25px;">Su presencia es nuestro mejor regalo.</p>
             <div class="honor-grid" data-aos="fade-up">
-                <div class="honor-box" style="border: 1px dashed var(--oro); padding: 15px;">
-                    <span>🎁 LIVERPOOL</span><br><strong>51234567</strong><br>
-                    <a id="btn-regalos" href="#" target="_blank" class="btn-oro" style="padding: 8px 15px; font-size: 0.6rem;">IR</a>
+                <div class="honor-box">
+                    <span>🎁 MESA DE REGALOS</span><br><strong class="txt-dinamico-primario">Liverpool #51234567</strong><br>
+                    <a id="btn-regalos" href="#" target="_blank" class="btn-accion" style="padding: 10px 20px; font-size: 0.6rem;">IR A LA MESA</a>
                 </div>
-                <div class="honor-box" style="border: 1px dashed var(--oro); padding: 15px;">
-                    <span>✉️ EFECTIVO</span><p style="font-size: 0.8rem;">Lluvia de Sobres</p>
+                <div class="honor-box">
+                    <span>✉️ EFECTIVO</span><p style="font-size: 0.8rem;">Lluvia de Sobres el día del evento.</p>
                 </div>
             </div>
         </section>
 
         <div id="img-final" class="parallax" style="height: 60vh;"></div>
 
-        <section style="background-color: #111; color: white;">
+        <div class="bloque-solido" id="seccion-final">
             <h1 class="nombres" style="font-size: 2.5rem;">¡Te Esperamos!</h1>
-            <p style="margin: 20px 0; font-weight: bold; color: var(--oro);">CONFIRMAR ANTES DEL:<br><span id="txt-fecha-limite"></span></p>
-            <a id="btn-confirmar" href="#" target="_blank" class="btn-oro" style="width: 80%;">WHATSAPP</a>
-        </section>
+            <p style="margin: 20px 0; font-weight: bold; letter-spacing: 2px;">CONFIRMAR ANTES DEL:<br><span id="txt-fecha-limite"></span></p>
+            <a id="btn-confirmar" href="#" target="_blank" class="btn-accion" style="width: 80%; background-color: white; color: var(--color-primario);">CONFIRMAR POR WHATSAPP</a>
+            <p style="margin-top: 30px; font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--color-dorado);">Lucía & Alejandro</p>
+        </div>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // Aplicar colores dinámicamente al cargar
+        document.documentElement.style.setProperty('--color-primario', COLORES.principal);
+        document.documentElement.style.setProperty('--color-dorado', COLORES.dorado);
+        document.documentElement.style.setProperty('--color-fondo', COLORES.fondo_claro);
+        document.documentElement.style.setProperty('--color-texto', COLORES.texto_oscuro);
+
         function startReveal() {
-            const env = document.getElementById('envelope');
-            env.classList.add('open');
+            document.getElementById('envelope').classList.add('open');
             setTimeout(() => {
                 document.getElementById('wrapper-envelope').style.opacity = '0';
                 setTimeout(() => {
@@ -221,25 +203,23 @@
                     document.getElementById('main-invitation').style.display = 'block';
                     document.getElementById('music-pill').style.display = 'block';
                     AOS.init({ duration: 1000, once: true });
-                    playMusic();
+                    document.getElementById('cancion').play();
                 }, 600);
             }, 1000);
         }
 
+        // Carga de datos
         document.getElementById('source-musica').src = ENLACES.musica;
-        document.getElementById('cancion').load();
         document.getElementById('img-portada').style.backgroundImage = `url('${ENLACES.foto_portada}')`;
         document.getElementById('img-intermedia').style.backgroundImage = `url('${ENLACES.foto_intermedia}')`;
         document.getElementById('img-final').style.backgroundImage = `url('${ENLACES.foto_final}')`;
         document.getElementById('btn-ceremonia').href = ENLACES.mapa_ceremonia;
         document.getElementById('btn-recepcion').href = ENLACES.mapa_recepcion;
-        document.getElementById('btn-hoteles').href = ENLACES.enlace_hoteles;
         document.getElementById('btn-regalos').href = ENLACES.enlace_mesa_regalos;
         document.getElementById('btn-confirmar').href = ENLACES.whatsapp_confirmacion;
         document.getElementById('txt-fecha-limite').innerText = ENLACES.fecha_limite;
 
         var audio = document.getElementById('cancion');
-        function playMusic() { audio.play().catch(e => console.log("Audio waiting for interaction")); }
         function toggleMusic() { 
             if(audio.paused){ audio.play(); document.getElementById('music-pill').innerText="❙❙ PAUSA"; } 
             else { audio.pause(); document.getElementById('music-pill').innerText="▶ MÚSICA"; } 
