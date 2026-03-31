@@ -16,19 +16,16 @@
             foto_final: "https://www.dropbox.com/scl/fi/snutqjlkrv7oglqswicq2/novios-besandoce.jpg?rlkey=ad7z44z08wgr0f4wcd20et7nz&raw=1",
             mapa_ceremonia: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
             mapa_recepcion: "https://www.google.com/maps/place/Cd.+de+M%C3%A9xico/@19.3202008,-99.4822761,10z/data=!3m1!4b1!4m6!3m5!1s0x85ce0036b1352927:0xdefd9e4ee8d18a5b!8m2!3d19.2464696!4d-99.1013498!16s%2Fg%2F1220wgqb?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D",
-            enlace_hoteles: "https://migrandia.github.io/Hoteles/", // Se abrirá en pestaña nueva
+            enlace_hoteles: "https://migrandia.github.io/Hoteles/", 
             enlace_mesa_regalos: "https://mesaderegalos.liverpool.com.mx/", 
             whatsapp_confirmacion: "https://wa.me/521234567890",
             fecha_limite: "10 de Noviembre de 2026"
         };
 
         /* ==========================================
-           2. CONFIGURACIÓN DE COLORES INDIVIDUALES
+           2. CONFIGURACIÓN DE COLORES
            ========================================== */
         const COLORES = {
-            color_cuerpo_sobre: "#1a252f",         
-            color_solapa_sobre: "#bca080",         
-            color_sello_lacre: "#d4af37",          
             color_fondo_invitacion: "#fdfcf9",      
             color_titulos: "#1a252f",              
             color_detalles_oro: "#bca080",         
@@ -44,34 +41,25 @@
 
     <style>
         :root {
-            --c-sobre: #1a252f; --c-solapa: #bca080; --c-sello: #d4af37;
             --c-fondo: #fdfcf9; --c-titulos: #1a252f; --c-oro: #bca080;
             --c-bloque: #1a252f; --c-btn: #bca080; --c-btn-txt: #ffffff;
             --c-regalos: #efeae2;
         }
 
-        body { margin: 0; padding: 0; background-color: #000; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; text-align: center; color: #333; line-height: 1.8; }
+        body { margin: 0; padding: 0; background-color: var(--c-fondo); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; text-align: center; color: #333; line-height: 1.8; }
 
-        .envelope-wrapper { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #000; z-index: 3000; position: fixed; width: 100%; top: 0; left: 0; transition: opacity 0.8s ease; }
-        .envelope { position: relative; width: 340px; height: 240px; background: var(--c-sobre); cursor: pointer; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; }
-        .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 130px solid var(--c-solapa); border-left: 170px solid transparent; border-right: 170px solid transparent; transform-origin: top; transition: transform 0.6s ease; z-index: 4; pointer-events: none; }
-        .pocket { position: absolute; bottom: 30px; width: 65px; height: 65px; background: var(--c-sello); border-radius: 50%; z-index: 5; box-shadow: 0 5px 15px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; font-family: 'Great Vibes', cursive; color: white; font-size: 1.8rem; pointer-events: none; border: 2px solid rgba(255,255,255,0.2); }
-        .envelope.open .flap { transform: rotateX(180deg); }
-        .envelope.open .pocket { opacity: 0; }
-        .env-text { color: white; margin-top: 80px; font-family: 'Montserrat', serif; letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; z-index: 2; opacity: 0.8; }
-
-        .invitation-content { display: none; max-width: 480px; margin: 0 auto; background-color: var(--c-fondo); box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+        .invitation-content { max-width: 480px; margin: 0 auto; background-color: var(--c-fondo); box-shadow: 0 0 40px rgba(0,0,0,0.1); }
         .parallax { height: 80vh; background-attachment: fixed; background-position: center; background-size: cover; position: relative; }
         .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); }
         
         section { padding: 70px 25px; }
         h1.nombres { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: white; margin: 0; font-weight: 300; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .conector { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--c-solapa); display: block; margin: -25px 0; }
+        .conector { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--c-oro); display: block; margin: -25px 0; }
         h2.titulo { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--c-titulos); letter-spacing: 1px; font-weight: 600; }
         
         .bloque-solido { background-color: var(--c-bloque); color: white; padding: 80px 30px; border-bottom: 5px solid var(--c-oro); }
         .btn-accion { display: inline-block; margin-top: 25px; padding: 16px 40px; background-color: var(--c-btn); color: var(--c-btn-txt); text-decoration: none; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; border-radius: 2px; border: none; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', serif; }
-        .btn-accion:hover { transform: scale(1.05); filter: brightness(1.1); box-shadow: 0 5px 15px rgba(188,160,128,0.3); }
+        .btn-accion:hover { transform: scale(1.05); filter: brightness(1.1); }
 
         .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
         .honor-box { padding: 20px 10px; }
@@ -81,30 +69,22 @@
 
         .timeline { text-align: left; padding-left: 35px; border-left: 1px solid var(--c-oro); margin: 50px 25px; }
         .step { position: relative; margin-bottom: 40px; font-size: 1rem; }
-        .step::before { content: ''; position: absolute; left: -41px; top: 12px; width: 10px; height: 10px; background: var(--c-oro); border-radius: 50%; box-shadow: 0 0 10px var(--c-oro); }
+        .step::before { content: ''; position: absolute; left: -41px; top: 12px; width: 10px; height: 10px; background: var(--c-oro); border-radius: 50%; }
         .step-icon { font-size: 1.3rem; margin-right: 10px; color: var(--c-oro); }
 
         .timer-container { display: flex; justify-content: center; gap: 20px; margin: 40px 0; }
         .t-num { font-size: 2.2rem; color: var(--c-oro); font-family: 'Cormorant Garamond', serif; font-weight: 600; }
         .t-lab { font-size: 0.6rem; text-transform: uppercase; color: #888; letter-spacing: 1px; font-family: 'Montserrat', serif; }
 
-        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 4000; background: rgba(255,255,255,0.9); padding: 12px 18px; border-radius: 40px; font-size: 9px; font-weight: bold; cursor: pointer; display: none; border: 1px solid #eee; font-family: 'Montserrat', serif; color: var(--c-titulos); }
+        #music-pill { position: fixed; top: 20px; right: 20px; z-index: 4000; background: rgba(255,255,255,0.9); padding: 12px 18px; border-radius: 40px; font-size: 9px; font-weight: bold; cursor: pointer; border: 1px solid #eee; font-family: 'Montserrat', serif; color: var(--c-titulos); }
     </style>
 </head>
 <body>
 
-    <div class="envelope-wrapper" id="wrapper-envelope">
-        <div class="envelope" id="envelope" onclick="startReveal()">
-            <div class="flap"></div>
-            <div class="pocket">L&A</div>
-            <div class="env-text">Nuestra Boda<br>Toca para abrir</div>
-        </div>
-    </div>
-
     <div id="music-pill" onclick="toggleMusic()">▶ MÚSICA</div>
     <audio id="cancion" loop><source id="source-musica" src="" type="audio/mpeg"></audio>
 
-    <div class="invitation-content" id="main-invitation">
+    <div class="invitation-content">
         
         <div id="img-portada" class="parallax">
             <div class="overlay"></div>
@@ -118,7 +98,7 @@
             <h2 class="titulo" data-aos="fade-up">Nuestra Historia</h2>
             <div style="max-width: 90%; margin: 0 auto; color: #555; font-size: 1.2rem; font-style: italic;" data-aos="fade-up">
                 <p>"Parece que fue ayer cuando nuestros caminos se cruzaron, sin imaginar que cada risa y cada momento nos traería hasta aquí."</p>
-                <p>Hoy, con el corazón lleno de gratitud, hemos decidido unir nuestras vidas para siempre. Es el inicio de una nueva aventura que queremos compartir con las personas que más amamos.</p>
+                <p>Hoy, con el corazón lleno de gratitud, hemos decidido unir nuestras vidas para siempre.</p>
             </div>
         </section>
 
@@ -176,11 +156,10 @@
 
         <section style="background-color: #f9f9f9; border-top: 1px solid #eee;">
             <h2 class="titulo" data-aos="fade-up">Hospedaje</h2>
-            <p style="font-size: 1rem; max-width: 80%; margin: 0 auto 20px; color: #666;">Para su comodidad durante el evento, recomendamos estas opciones con tarifas especiales.</p>
             <a id="btn-hoteles" href="#" target="_blank" class="btn-accion">VER HOTELES</a>
         </section>
 
-        <section style="background-color: var(--c-fondo);">
+        <section>
             <h2 class="titulo" data-aos="fade-up">Mesa de Regalos</h2>
             <div class="honor-grid" data-aos="fade-up">
                 <div class="honor-box con-fondo">
@@ -190,7 +169,7 @@
                 </div>
                 <div class="honor-box con-fondo">
                     <span>✉️ EFECTIVO</span>
-                    <p style="font-size: 0.85rem; margin-top: 10px; color: #555;">Agradecemos su detalle mediante lluvia de sobres el día del evento.</p>
+                    <p style="font-size: 0.85rem; margin-top: 10px; color: #555;">Agradecemos su detalle mediante lluvia de sobres.</p>
                 </div>
             </div>
         </section>
@@ -208,10 +187,8 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // Cargar Colores
         const r = document.documentElement.style;
-        r.setProperty('--c-sobre', COLORES.color_cuerpo_sobre);
-        r.setProperty('--c-solapa', COLORES.color_solapa_sobre);
-        r.setProperty('--c-sello', COLORES.color_sello_lacre);
         r.setProperty('--c-fondo', COLORES.color_fondo_invitacion);
         r.setProperty('--c-titulos', COLORES.color_titulos);
         r.setProperty('--c-oro', COLORES.color_detalles_oro);
@@ -220,36 +197,7 @@
         r.setProperty('--c-btn-txt', COLORES.color_texto_botones);
         r.setProperty('--c-regalos', COLORES.color_fondo_mesa_regalos);
 
-        var audio = document.getElementById('cancion');
-        var musicStarted = false;
-
-        function enableMusic() {
-            if (!musicStarted) {
-                audio.play().then(() => {
-                    musicStarted = true;
-                    document.getElementById('music-pill').innerText = "❙❙ PAUSA";
-                    document.removeEventListener('click', enableMusic);
-                    document.removeEventListener('touchstart', enableMusic);
-                }).catch(e => console.log("Audio en espera..."));
-            }
-        }
-
-        document.addEventListener('click', enableMusic);
-        document.addEventListener('touchstart', enableMusic);
-
-        function startReveal() {
-            document.getElementById('envelope').classList.add('open');
-            setTimeout(() => {
-                document.getElementById('wrapper-envelope').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('wrapper-envelope').style.display = 'none';
-                    document.getElementById('main-invitation').style.display = 'block';
-                    document.getElementById('music-pill').style.display = 'block';
-                    AOS.init({ duration: 1200, once: true });
-                }, 600);
-            }, 1000);
-        }
-
+        // Inicializar Datos
         document.getElementById('source-musica').src = ENLACES.musica;
         document.getElementById('cancion').load();
         document.getElementById('img-portada').style.backgroundImage = `url('${ENLACES.foto_portada}')`;
@@ -262,11 +210,19 @@
         document.getElementById('btn-confirmar').href = ENLACES.whatsapp_confirmacion;
         document.getElementById('txt-fecha-limite').innerText = ENLACES.fecha_limite;
 
+        // Iniciar animaciones de inmediato
+        window.addEventListener('load', () => {
+            AOS.init({ duration: 1200, once: true });
+        });
+
+        // Música
+        var audio = document.getElementById('cancion');
         function toggleMusic() { 
             if(audio.paused){ audio.play(); document.getElementById('music-pill').innerText="❙❙ PAUSA"; } 
             else { audio.pause(); document.getElementById('music-pill').innerText="▶ MÚSICA"; } 
         }
 
+        // Timer
         function updateTimer() {
             const weddingDate = new Date("December 10, 2026 17:00:00").getTime();
             const now = new Date().getTime();
